@@ -18,13 +18,10 @@ A post can exists with zero or many comments.
 A comment can exists with one and only one post.
 
 ```text
-post create
-post update
 post delete - linked comments delete
 
+comments by post
 comment create - link to post
-comment update
-comment delete
 ```
 
 ## Post - Comment model v1
@@ -74,55 +71,19 @@ GET {{HOST}}/posts/{{ID}}
 POST {{HOST}}/posts
 
 {
-  "item1": "value1"
 }
 
 ### update by post id
 PATCH {{HOST}}/posts/{{ID}}
 
 {
- "item1": "value1"
 }
 
 ### delete by post id
 DELETE {{HOST}}/posts/{{ID}}
 ```
 
-## Comments API v1
-
-```http
-@HOST = http://localhost:8080
-@ID = commentId
-@FOREIGN_ID = postId
-
-### find all
-GET {{HOST}}/comments
-
-### find all by post id
-GET {{HOST}}/{{FOREIGN_ID}}/comments
-
-### find one by comment id
-GET {{HOST}}/comments/{{ID}}
-
-### save and link to post by post id
-POST {{HOST}}/{{FOREIGN_ID}}/comments
-
-{
-  "tem1": "value1"
-}
-
-### update by comment id
-PATCH {{HOST}}/comments/{{ID}}
-
-{
- "item1": "value1"
-}
-
-### delete by comment id
-DELETE {{HOST}}/comments/{{ID}}
-```
-
-## Comments API v2
+## Comments API
 
 ```http
 @HOST = http://localhost:8080
@@ -142,14 +103,12 @@ GET {{HOST}}/comments/{{ID}}
 POST {{HOST}}/comments?postId={{FOREIGN_ID}}
 
 {
-  "item1": "value1"
 }
 
 ### update by comment id
 PATCH {{HOST}}/comments/{{ID}}
 
 {
- "item1": "value1"
 }
 
 ### delete by comment id

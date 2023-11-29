@@ -13,140 +13,105 @@ A person can exists with zero or one fingerprint.
 A fingerprint can exists with one and only one person.
 
 ```text
-person create
-person update
+persons by fingerprint
 person delete - linked fingerprint delete
 
+fingerprints by person
 fingerprint create - link to person
-fingerprint update
-fingerprint delete
 ```
 
-## Post - Comment model v1
+## Fingerprint - Person model v1
 
 ```javascript
-class Post {
+class Person {
   id: string;
+  fingerprintId: string;
 }
 
-class Comment {
+class Fingerprint {
   id: string;
-  postId: string;
+  personId: string;
 }
 ```
 
-## Post - Comment model v2
+## Fingerprint - Person model v2
 
 ```javascript
-class Post {
+class Person {
   id: string;
 }
 
-class Comment {
+class Fingerprint {
   id: string;
 }
 
-class PostComment {
+class PersonFingerprint {
   id: string;
-  postId: string;
-  commentId: string;
+  personId: string;
+  fingerprintId: string;
 }
 ```
 
-## Posts API
+## Persons API
 
 ```http
 @HOST = http://localhost:8080
-@ID = postId
+@ID = personId
+@FOREIGN_ID = fingerprintId
 
 ### find all
-GET {{HOST}}/posts
+GET {{HOST}}/persons
 
-### find one by post id
-GET {{HOST}}/posts/{{ID}}
+### find all by fingerprin id
+GET {{HOST}}/persons?fingerprintId={{FOREIGN_ID}}
+
+### find one by person id
+GET {{HOST}}/persons/{{ID}}
 
 ### save
-POST {{HOST}}/posts
+POST {{HOST}}/persons
 
 {
-  "item1": "value1"
 }
 
-### update by post id
-PATCH {{HOST}}/posts/{{ID}}
+### update by person id
+PATCH {{HOST}}/persons/{{ID}}
 
 {
- "item1": "value1"
 }
 
-### delete by post id
-DELETE {{HOST}}/posts/{{ID}}
+### delete by person id
+DELETE {{HOST}}/persons/{{ID}}
 ```
 
-## Comments API v1
+## Fingerprint API
 
 ```http
 @HOST = http://localhost:8080
-@ID = commentId
-@FOREIGN_ID = postId
+@ID = fingerprintId
+@FOREIGN_ID = personId
 
 ### find all
-GET {{HOST}}/comments
+GET {{HOST}}/fingerprints
 
-### find all by post id
-GET {{HOST}}/{{FOREIGN_ID}}/comments
+### find all by person id
+GET {{HOST}}/fingerprints?personId={{FOREIGN_ID}}
 
-### find one by comment id
-GET {{HOST}}/comments/{{ID}}
+### find one by fingerprint id
+GET {{HOST}}/fingerprints/{{ID}}
 
-### save and link to post by post id
-POST {{HOST}}/{{FOREIGN_ID}}/comments
-
-{
-  "tem1": "value1"
-}
-
-### update by comment id
-PATCH {{HOST}}/comments/{{ID}}
+### save and link to person by person id
+POST {{HOST}}/fingerprints?personId={{FOREIGN_ID}}
 
 {
- "item1": "value1"
 }
 
-### delete by comment id
-DELETE {{HOST}}/comments/{{ID}}
-```
-
-## Comments API v2
-
-```http
-@HOST = http://localhost:8080
-@ID = commentId
-@FOREIGN_ID = postId
-
-### find all
-GET {{HOST}}/comments
-
-### find all by post id
-GET {{HOST}}/comments?postId={{FOREIGN_ID}}
-
-### find one by comment id
-GET {{HOST}}/comments/{{ID}}
-
-### save and link to post by post id
-POST {{HOST}}/comments?postId={{FOREIGN_ID}}
+### update by fingerprint id
+PATCH {{HOST}}/fingerprints/{{ID}}
 
 {
-  "item1": "value1"
 }
 
-### update by comment id
-PATCH {{HOST}}/comments/{{ID}}
-
-{
- "item1": "value1"
-}
-
-### delete by comment id
-DELETE {{HOST}}/comments/{{ID}}
+### delete by fingerprint id
+DELETE {{HOST}}/fingerprints/{{ID}}
 ```

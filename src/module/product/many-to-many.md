@@ -19,13 +19,10 @@ An author can exists with zero or many books.
 A book can exists with one or many authors.
 
 ```text
-author create
-author update
-author delete
+authors by book
 
+books by author
 book create - link to author
-book update
-book delete
 ```
 
 ## Book - Author model
@@ -51,9 +48,13 @@ class BookAuthor {
 ```http
 @HOST = http://localhost:8080
 @ID = authorId
+@FOREIGN_ID = bookId
 
 ### find all
 GET {{HOST}}/authors
+
+### find all by book id
+GET {{HOST}}/authors?bookId={{FOREIGN_ID}}
 
 ### find one by author id
 GET {{HOST}}/authors/{{ID}}
@@ -62,21 +63,19 @@ GET {{HOST}}/authors/{{ID}}
 POST {{HOST}}/authors
 
 {
-  "item1": "value1"
 }
 
 ### update by author id
 PATCH {{HOST}}/authors/{{ID}}
 
 {
- "item1": "value1"
 }
 
 ### delete by author id
 DELETE {{HOST}}/authors/{{ID}}
 ```
 
-## Books API v1
+## Books API
 
 ```http
 @HOST = http://localhost:8080
@@ -87,40 +86,6 @@ DELETE {{HOST}}/authors/{{ID}}
 GET {{HOST}}/books
 
 ### find all by author id
-GET {{HOST}}/{{FOREIGN_ID}}/books
-
-### find one by book id
-GET {{HOST}}/books/{{ID}}
-
-### save and link to author by author id
-POST {{HOST}}/{{FOREIGN_ID}}/books
-
-{
-  "item1": "value1"
-}
-
-### update by book id
-PATCH {{HOST}}/books/{{ID}}
-
-{
- "item1": "value1"
-}
-
-### delete by book id
-DELETE {{HOST}}/books/{{ID}}
-```
-
-## Books API v2
-
-```http
-@HOST = http://localhost:8080
-@ID = bookId
-@FOREIGN_ID = authorId
-
-### find all
-GET {{HOST}}/books
-
-### find all by book id
 GET {{HOST}}/books?authorId={{FOREIGN_ID}}
 
 ### find one by book id
@@ -130,14 +95,12 @@ GET {{HOST}}/books/{{ID}}
 POST {{HOST}}/books?authorId={{FOREIGN_ID}}
 
 {
-  "item1": "value1"
 }
 
 ### update by book id
 PATCH {{HOST}}/books/{{ID}}
 
 {
- "item1": "value1"
 }
 
 ### delete by book id
