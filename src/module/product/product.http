@@ -1,0 +1,71 @@
+@HOST = http://localhost:8080
+@RESOURCE = /products
+@URL = {{HOST}}{{RESOURCE}}
+@CONTENT_TYPE_JSON = Content-Type: application/json
+@AUTH = X-Token-Jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjdmNmEzNzQ1NDUzMDAyNTc3MGMxZiIsImZpcnN0bmFtZSI6Ik1lcmVkaXRoIiwibGFzdG5hbWUiOiJNY0xhdWdobGluIiwicm9sZSI6IkFETUlOIiwiY29tcGFueSI6IjYzYjdmNmEzNzQ1NDUzMDAyNTc3MGMyMCIsIm1vZHVsZSI6IlBST0RVQ0VSIiwiYXV0aG9yaXplZCI6dHJ1ZSwiaWF0IjoxNjg2ODE1MjY5LCJleHAiOjE2ODY4NTEyNjl9.33ymr5MeHBp7US2i3S7UW5sLiFWO3_JrTfMXdeAyqLY
+@ID = 648b081cf30e9f05ebe979fc
+@FINDALL_PAGINATION = ?offset=2&limit=3
+@FINDALL_SORT = ?sort={"orderBy":"date_created","order":"asc"}
+@FINDALL_SEARCH1 = ?search={}
+@FINDALL_SEARCH2 = ?search={"status": "status1"}
+@FINDALL_SEARCH3 = ?search={"$or": [{"status": "status1"}, {"status": "status3"}]}
+@FINDALL_SEARCH4 = ?search={"$or": [{"properties.location": "location1"}, {"properties.grade": "grade1"}]}
+@FINDALL_SEARCH5 = ?search={"status": {"$in": ["status1", "status2", "status3"]}}
+@FINDALL_SEARCH6 = ?search={"$or": [{"status": {"$regex": "manufac", "$options": "i"}}, {"securedBy": {"$regex": "secur", "$options": "i"}}]}
+@FINDALL_SEARCH7 = ?search={"status": {"$regex": "status1", "$options": "i"}}
+@FINDALL_SEARCH8 = ?search={"status": "status4", "securedBy": "securedBy1"}
+@FINDALL_QUERY = {{FINDALL_PAGINATION}}
+
+### findAll
+GET {{URL}}{{FINDALL_QUERY}}
+{{CONTENT_TYPE_JSON}}
+{{AUTH}}
+
+### findById
+GET {{URL}}/{{ID}}
+{{CONTENT_TYPE_JSON}}
+{{AUTH}}
+
+### save
+POST {{URL}}
+{{CONTENT_TYPE_JSON}}
+{{AUTH}}
+
+{
+  "status": "status3",
+  "securedBy": "securedBy1",
+  "properties": {
+    "productType": "632829ff73a1de349e42ed41",
+    "quantity": 12,
+    "norm": "norm1",
+    "grade": "grade1",
+    "customProperties": {
+      "test1": "test1",
+      "test2": "test2",
+      "test3": "test3"
+    }
+  },
+  "previousProducts": [
+    "639b53e06004d900250ebfa3",
+    "639b53e06004d900250ebf90"
+  ],
+  "campaigns": [
+    {
+      "campaignId": "636a2d99dac6f3505d9a4cd9"
+    }
+  ]
+}
+
+### updateById
+PATCH {{URL}}/{{ID}}
+{{CONTENT_TYPE_JSON}}
+{{AUTH}}
+
+{
+ "status": "status1_updated"
+}
+
+### deleteById
+DELETE {{URL}}/{{ID}}
+{{CONTENT_TYPE_JSON}}
+{{AUTH}}
