@@ -12,11 +12,11 @@
 |    3    |     2     |
 |    3    |     5     |
 
-## Mutation dependencies
+## Dependencies
 
-An author can exists without any book.
+An author can exists with zero or many books.
 
-A book can exists with at least one author.
+A book can exists with one or many authors.
 
 ```text
 author create

@@ -1,30 +1,25 @@
-# One-to-Many: ONE post - MANY comments
+# One-to-Many: ONE fingerprint - ONE person
 
-| postId  | commentId |
-|---------|-----------|
-|    1    |     1     |
-|    1    |     2     |
-|    1    |     3     |
-|    2    |     4     |
-|    2    |     5     |
-|    3    |     6     |
-|    3    |     7     |
-|    3    |     8     |
+| fingerprintId | personId |
+|---------------|----------|
+|       1       |     1    |
+|       2       |     2    |
+|       3       |     3    |
 
 ## Dependencies
 
-A post can exists with zero or many comments.
+A person can exists with zero or one fingerprint.
 
-A comment can exists with one and only one post.
+A fingerprint can exists with one and only one person.
 
 ```text
-post create
-post update
-post delete - linked comments delete
+person create
+person update
+person delete - linked fingerprint delete
 
-comment create - link to post
-comment update
-comment delete
+fingerprint create - link to person
+fingerprint update
+fingerprint delete
 ```
 
 ## Post - Comment model v1
