@@ -52,7 +52,7 @@ The request could not be completed because of a conflict.
 
 The requested resource is no longer available.
 
-## 412 Precondition Failed
+### 412 Precondition Failed
 
 The pre condition given in the request evaluated to false by the server.
 
